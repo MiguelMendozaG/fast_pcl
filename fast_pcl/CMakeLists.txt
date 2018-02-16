@@ -10,3 +10,6 @@ add_definitions(${PCL_DEFINITIONS})
 add_executable(fast_pcl main.cpp)
 target_link_libraries(fast_pcl ${PCL_LIBRARIES})
 
+#add_executable(pcd_files_headers pcd_files_headers.cpp)
+#target_link_libraries(pcd_files_headers ${PCL_LIBRARIES})
+

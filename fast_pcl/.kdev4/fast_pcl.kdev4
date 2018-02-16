@@ -39,3 +39,6 @@ Project Target=fast_pcl,fast_pcl
 Use External Terminal=false
 Working Directory=
 isExecutable=false
+
+[Project]
+VersionControlSupport=kdevgit

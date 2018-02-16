@@ -70,7 +70,7 @@ void read_all_z(std::string input_folder){
   for(int i = 0; i<1312; i+=5){
     std::stringstream indice_img;
     indice_img << i;
-    readDoubleCoordinates(input_folder + "imagen-" + indice_img.str() + ".dat", pcl_raw);
+    readDoubleCoordinates(input_folder + "imagen-" + indice_img.str() + ".xyz", pcl_raw);
     pcl_file_pcd->width = pcl_raw.size();
     pcl_file_pcd->height = 1;
     pcl_file_pcd->is_dense = false;
@@ -93,31 +93,7 @@ void read_all_z(std::string input_folder){
 int
 main (int argc, char** argv)
 {
-  std::string input_folder ("/home/miguelmg/Documents/CIDETEC/semestre 2/vision 3d/proyecto/6d pose/hinterstoisser/nubes/absolutas/modelo/");
+  std::string input_folder ("/home/miguelmg/Documents/CIDETEC/semestre 2/vision 3d/proyecto/6d pose/hinterstoisser/nubes/modelo2/absolute/background/");
   read_all_z(input_folder);
-  pcl::PCLPointCloud2::Ptr cloud (new pcl::PCLPointCloud2 ());
-  pcl::PCLPointCloud2::Ptr cloud_filtered (new pcl::PCLPointCloud2 ());
-
-  // Fill in the cloud data
-  pcl::PCDReader reader;
-  // Replace the path below with the path where you saved your file
-  reader.read ("imagen-nube_de_puntos.xyz", *cloud); // Remember to download the file first!
-
-  std::cerr << "PointCloud before filtering: " << cloud->width * cloud->height 
-       << " data points (" << pcl::getFieldsList (*cloud) << ").";
-
-  // Create the filtering object
-  pcl::VoxelGrid<pcl::PCLPointCloud2> sor;
-  sor.setInputCloud (cloud);
-  sor.setLeafSize (0.001f, 0.001f, 0.001f);
-  sor.filter (*cloud_filtered);
-
-  std::cerr << "PointCloud after filtering: " << cloud_filtered->width * cloud_filtered->height 
-       << " data points (" << pcl::getFieldsList (*cloud_filtered) << ").";
-
-  pcl::PCDWriter writer;
-  writer.write ("image_0_downs.xyz", *cloud_filtered, 
-         Eigen::Vector4f::Zero (), Eigen::Quaternionf::Identity (), false);
-
   return (0);
 }
