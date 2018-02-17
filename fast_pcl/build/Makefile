@@ -111,17 +111,57 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named fast_pcl
+# Target rules for targets named filter_voxel
 
 # Build rule for target.
-fast_pcl: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 fast_pcl
-.PHONY : fast_pcl
+filter_voxel: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 filter_voxel
+.PHONY : filter_voxel
 
 # fast build rule for target.
-fast_pcl/fast:
-	$(MAKE) -f CMakeFiles/fast_pcl.dir/build.make CMakeFiles/fast_pcl.dir/build
-.PHONY : fast_pcl/fast
+filter_voxel/fast:
+	$(MAKE) -f CMakeFiles/filter_voxel.dir/build.make CMakeFiles/filter_voxel.dir/build
+.PHONY : filter_voxel/fast
+
+#=============================================================================
+# Target rules for targets named main
+
+# Build rule for target.
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
+
+# fast build rule for target.
+main/fast:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+filter_voxel.o: filter_voxel.cpp.o
+
+.PHONY : filter_voxel.o
+
+# target to build an object file
+filter_voxel.cpp.o:
+	$(MAKE) -f CMakeFiles/filter_voxel.dir/build.make CMakeFiles/filter_voxel.dir/filter_voxel.cpp.o
+.PHONY : filter_voxel.cpp.o
+
+filter_voxel.i: filter_voxel.cpp.i
+
+.PHONY : filter_voxel.i
+
+# target to preprocess a source file
+filter_voxel.cpp.i:
+	$(MAKE) -f CMakeFiles/filter_voxel.dir/build.make CMakeFiles/filter_voxel.dir/filter_voxel.cpp.i
+.PHONY : filter_voxel.cpp.i
+
+filter_voxel.s: filter_voxel.cpp.s
+
+.PHONY : filter_voxel.s
+
+# target to generate assembly for a file
+filter_voxel.cpp.s:
+	$(MAKE) -f CMakeFiles/filter_voxel.dir/build.make CMakeFiles/filter_voxel.dir/filter_voxel.cpp.s
+.PHONY : filter_voxel.cpp.s
 
 main.o: main.cpp.o
 
@@ -129,7 +169,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/fast_pcl.dir/build.make CMakeFiles/fast_pcl.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -138,7 +178,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/fast_pcl.dir/build.make CMakeFiles/fast_pcl.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -147,7 +187,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/fast_pcl.dir/build.make CMakeFiles/fast_pcl.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -157,8 +197,12 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... filter_voxel"
 	@echo "... edit_cache"
-	@echo "... fast_pcl"
+	@echo "... main"
+	@echo "... filter_voxel.o"
+	@echo "... filter_voxel.i"
+	@echo "... filter_voxel.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

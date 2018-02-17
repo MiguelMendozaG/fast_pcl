@@ -11,6 +11,7 @@
 using namespace std;
 //pcl::PCLPointCloud2::Ptr z (new pcl::PCLPointCloud2 ());
 vector <pcl::PointCloud<pcl::PointXYZ>::Ptr> all_z;
+vector <pcl::PointCloud<pcl::PointXYZ>::Ptr> all_bg;
 int user_data;
  
 bool readDouble(std::string file_name, std::vector< double >& data)
@@ -66,7 +67,7 @@ bool readDoubleCoordinates(std::string file_name, std::vector< std::vector< doub
   return true;
 }
 
-void read_all_z(std::string input_folder , vector <pcl::PointCloud<pcl::PointXYZ>::Ptr> pcl_destiny){
+void read_all_z(std::string input_folder, bool cloud_select){
   std::vector< std::vector<double> > pcl_raw;
   std::vector< std::vector<double> > pcl_copy;
   std::vector< std::vector< std::vector <double> > > cloud_vector;
@@ -78,32 +79,40 @@ void read_all_z(std::string input_folder , vector <pcl::PointCloud<pcl::PointXYZ
    
   
 
-  for(int i = 0; i<15; i+=5){
+  for(int i = 0; i<1312; i+=5){
     std::stringstream indice_img;
     indice_img << i;
     std::cout  << "\n Imagen " << i << endl;
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
     pcl::io::loadPCDFile (input_folder + "imagen-" +  indice_img.str() + ".pcd", *cloud);
-    all_z.push_back(cloud); //almacena en una estructura tipo pcl
-    
+    if (cloud_select==0)
+      all_z.push_back(cloud); //almacena en una estructura tipo pcl
+    else
+      all_bg.push_back(cloud);
+      
+    /*
     readDoubleCoordinates(input_folder + "imagen-" +  indice_img.str() + ".xyz", pcl_raw);
     cloud_vector.push_back(pcl_raw); //almacena en una estructura tipo vector
-    std::cout << "\n pcl raw" << pcl_raw[0][0] << endl;
+    std::cout << "\n pcl raw" << pcl_raw[0][0] << endl;*/
    }
    //double val = cloud_vector[0][0][0];
+   /*
   std::cout << "\n cloud_vector(0): " << cloud_vector[2][0][1] << endl;
   std::cout << "\n pcl raw " << pcl_raw.size() << endl;
   //cloud_vector[2].swap(pcl_copy);
   pcl_copy = cloud_vector[2];
   std::cout << "\n plc_copy (0): " << pcl_copy[0][1] << endl;
-  std::cout << "\n cloud_vector (0): " << cloud_vector[2][0][1] << endl;
+  std::cout << "\n cloud_vector (0): " << cloud_vector[2][0][1] << endl;*/
 }
 
 int
 main (int argc, char** argv)
 {
   std::string input_folder ("/home/miguelmg/Documents/CIDETEC/semestre 2/vision 3d/proyecto/6d pose/hinterstoisser/nubes/modelo2/absolute/model/");
-  read_all_z(input_folder, all_z);
+  std::string input_folder2 ("/home/miguelmg/Documents/CIDETEC/semestre 2/vision 3d/proyecto/6d pose/hinterstoisser/nubes/modelo2/absolute/background_filtered/");
+  read_all_z(input_folder, 0);
+  read_all_z(input_folder2, 1);
+  std::cin.get();
 
   return (0);
 }
